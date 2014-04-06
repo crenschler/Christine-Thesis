@@ -1,8 +1,3 @@
-# load libraries
-using ODE
-using DataFrames
-using Gadfly
-
 # define the model
 function TcVcTh(t,x,param) # calculate instantaneous rate of change for
                            # uninfected hepatocytes (Tc),virions(Vc),
@@ -41,16 +36,12 @@ param = [3661.7, 1.4e-3, 7.4e-8, 0.31, 4.4, 11.5, 40.5, 6.33e6, 2.7266, 2.5e-5, 
       # [s, dc, beta_c, r1, r2, c, p, Tc_max, delta, alpha, Sh, dh, gamma]
 
 # run model
-result = ode45((t,x)->TcVcTh(t,x,param),t,inits);
+import ODE
+result = ODE.ode45((t,x)->TcVcTh(t,x,param),t,inits);
 
-# collate results in DataFrame
-df=DataFrame();
-df["t"]=result[1];
-df["Tc"]=result[2][:,1];
-df["Vc"]=result[2][:,2];
-df["Th"]=result[2][:,3];
-
-# Plot using Gadfly
-p = Gadfly.plot(df,x="t",y="Vc",Geom.line)
+# Plot using Winston
+import Winston
+wn = Winston
+wn.plot(t,x[:,1],"b",t,x[:,2],"g",t,x[:,3],"r")
 
 
