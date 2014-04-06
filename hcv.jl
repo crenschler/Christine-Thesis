@@ -36,7 +36,7 @@ end
 
 # initialize model
 t = linspace (0,10000,1);
-inits = [0,0,9e-8];
+inits = [2.4e6,1.0e6,03068];
 param = [3661.7, 1.4e-3, 7.4e-8, 0.31, 4.4, 11.5, 40.5, 6.33e6, 2.7266, 2.5e-5, 9e-7, 0.1, 0.25];
       # [s, dc, beta_c, r1, r2, c, p, Tc_max, delta, alpha, Sh, dh, gamma]
 
@@ -44,13 +44,13 @@ param = [3661.7, 1.4e-3, 7.4e-8, 0.31, 4.4, 11.5, 40.5, 6.33e6, 2.7266, 2.5e-5, 
 result = ode45((t,x)->TcVcTh(t,x,param),t,inits);
 
 # collate results in DataFrame
-df=DataFrame( );
+df=DataFrame();
 df["t"]=result[1];
 df["Tc"]=result[2][:,1];
 df["Vc"]=result[2][:,2];
 df["Th"]=result[2][:,3];
 
 # Plot using Gadfly
-plot = Gadfly.plot(df,x="t",y="Vc",Geom.line)
+p = Gadfly.plot(df,x="t",y="Vc",Geom.line)
 
 
