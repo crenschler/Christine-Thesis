@@ -36,7 +36,7 @@ end
 
 # initialize model
 t = linspace (0,10000,1);
-inits = [2.4e6,1.0e6,03068];
+inits = [2.4e6,1.0e6,0.3068];
 param = [3661.7, 1.4e-3, 7.4e-8, 0.31, 4.4, 11.5, 40.5, 6.33e6, 2.7266, 2.5e-5, 9e-7, 0.1, 0.25];
       # [s, dc, beta_c, r1, r2, c, p, Tc_max, delta, alpha, Sh, dh, gamma]
 
