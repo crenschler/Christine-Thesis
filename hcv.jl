@@ -28,18 +28,29 @@ function TcVcTh(t,x,param) # calculate instantaneous rate of change for
 
     Tc2 = Sc+r1*Tc*(1-((Tc+(c/p*Vc))/Tc_max))-dc*Tc-beta_c*Tc*Vc
     Vc2 = (p/c)*beta_c*Tc*Vc+r2*Vc*(1-((Tc+(c/p*Vc))/Tc_max))-delta*(1+alpha*Th)*Vc
-    Th2 = Sh*(1+gamma*Vc)-dhTh
+    Th2 = Sh*(1+gamma*Vc)-dh*Th
 
     [Tc2,Vc2,Th2]
 
 end
 
 # initialize model
-t = linspace (0,10000,1)
-param = [3661.7, 1.4e-3, 7.4e-8, 0.31, 4.4, 11.5, 40.5, 6.33e6, 2.7266, 2.5e-5, *Sh value, *dh value, *gamma value]
+t = linspace (0,10000,1);
+inits = [0,0,9e-8];
+param = [3661.7, 1.4e-3, 7.4e-8, 0.31, 4.4, 11.5, 40.5, 6.33e6, 2.7266, 2.5e-5, 9e-7, 0.1, 0.25];
       # [s, dc, beta_c, r1, r2, c, p, Tc_max, delta, alpha, Sh, dh, gamma]
 
 # run model
-result = ode45(TcVcTh,t,x,param); #dont think this is right yet
+result = ode45((t,x)->TcVcTh(t,x,param),t,inits);
+
+# collate results in DataFrame
+df=DataFrame( );
+df["t"]=result[1];
+df["Tc"]=result[2][:,1];
+df["Vc"]=result[2][:,2];
+df["Th"]=result[2][:,3];
+
+# Plot using Gadfly
+plot = Gadfly.plot(df,x="t",y="Vc",Geom.line)
 
 
