@@ -1,3 +1,6 @@
+import ODE
+import Winston
+
 # define the model
 function TcVcTh(t,x,param) # calculate instantaneous rate of change for
                            # uninfected hepatocytes (Tc),virions(Vc),
@@ -30,18 +33,17 @@ function TcVcTh(t,x,param) # calculate instantaneous rate of change for
 end
 
 # initialize model
-t = linspace (0,10000,1);
+t = linspace(0,10000,10001);
 inits = [2.4e6,1.0e6,0.3068];
 param = [3661.7, 1.4e-3, 7.4e-8, 0.31, 4.4, 11.5, 40.5, 6.33e6, 2.7266, 2.5e-5, 9e-7, 0.1, 0.25];
       # [s, dc, beta_c, r1, r2, c, p, Tc_max, delta, alpha, Sh, dh, gamma]
 
 # run model
-import ODE
-result = ODE.ode45((t,x)->TcVcTh(t,x,param),t,inits);
+time, pops = ODE.ode45((t,x)->TcVcTh(t,x,param),t,inits);
 
 # Plot using Winston
-import Winston
-wn = Winston
-wn.plot(t,x[:,1],"b",t,x[:,2],"g",t,x[:,3],"r")
-
+Winston.plot(time,pops[:,1],"b",time,pops[:,2],"g",time,pops[:,3],"r")
+# blue = Tc
+# green = Vc
+# red = Th
 
