@@ -22,7 +22,7 @@ Vc_init= 1.0e6;
 Th_init= 0.3068;
 
 % run model
-[T_out N_out]=ode45(@hcv,tspan,[Tc_init,Vc_init,Th_init]);
+[T_out N_out]=ode45(@TcVcTh,tspan,[Tc_init,Vc_init,Th_init],[]);
 
 % rename variables
 Tc = N_out(:,1);
@@ -32,19 +32,13 @@ Th = N_out(:,3);
 % plot
 figure(1)
 clf
-subplot(2,1,1)
-hold on
-plot(T_out,Tc,'b-','LineWidth',2);
-plot(T_out,Vc,'r-','LineWidth',2);
-plot(T_out,Th,'g-','LineWidth',2);
+semilogy(T_out,Tc,'b-','LineWidth',2);
+hold on;
+semilogy(T_out,Vc,'r-','LineWidth',2);
+hold on;
+semilogy(T_out,Th,'g-','LineWidth',2);
 xlabel('Time (days)')
 ylabel('HCV RNA & cells/ml')
 legend('Tc','Vc','Th')
 title('ODE model','Fontsize',12)
-ylim([0 100000000])
-
-subplot(2,1,2)
-plot(Tc/Tc_max,Vc/Tc_max,'LineWidth',2)
-xlabel('Fraction Uninfected')
-ylabel('Fraction Infected')
-saveas(1,'HCV ode.jpg')
+ylim([0 10000000])
