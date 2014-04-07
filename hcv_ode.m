@@ -22,12 +22,17 @@ Vc_init= 1.0e6;
 Th_init= 0.3068;
 
 % run model
-[T_out N_out]=ode45(@TcVcTh,tspan,[Tc_init,Vc_init,Th_init],[]);
+[T_out, N_out]=ode45(@TcVcTh, tspan, [Tc_init, Vc_init, Th_init], []);
 
 % rename variables
 Tc = N_out(:,1);
 Vc = N_out(:,2);
 Th = N_out(:,3);
+
+csvwrite('T_out.csv', T_out)
+csvwrite('N_out.csv', N_out)
+
+
 
 % plot
 figure(1)
