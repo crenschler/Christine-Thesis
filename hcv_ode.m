@@ -14,12 +14,12 @@ dh=0.1;             % CD4+ death rate
 gamma=0.10;         % dependence of recruitment on viral load
 
 % define time
-tspan = [0,365*30];
+tspan = [0,500];
 
 % define initial conditions
 Tc_init= 2.4e6;
 Vc_init= 1.0e6;
-Th_init= 0.3068;
+Th_init= .38;
 
 % run model
 [T_out, N_out]=ode45(@TcVcTh, tspan, [Tc_init, Vc_init, Th_init], []);
@@ -31,7 +31,6 @@ Th = N_out(:,3);
 
 csvwrite('T_out.csv', T_out)
 csvwrite('N_out.csv', N_out)
-
 
 
 % plot
