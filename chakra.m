@@ -14,11 +14,11 @@ tspan = [0,500];
 % define initial conditions
 I_init= 10;
 V_init= 10;
-E_init= 10e5;
+E_init= 10e-5;
 H_init= 2399990;
 
 % run model
-[T_out, N_out]=ode45(@IVE, tspan, [I_init, V_init, E_init,H_init], []);
+[T_out, N_out]=ode45(@IVE, tspan, [I_init, V_init, E_init, H_init], []);
 
 % rename variables
 I = N_out(:,1);
@@ -38,6 +38,6 @@ hold on;
 semilogy(T_out,H,'y-','LineWidth',2);
 xlabel('Time (days)')
 ylabel('HCV RNA & cells/ml')
-legend('I','V','E')
+legend('I','V','E','H')
 title('ODE model','Fontsize',12)
 ylim([0 10000000])
