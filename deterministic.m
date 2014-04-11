@@ -1,4 +1,4 @@
-function dndt = deterministic(t, n)
+function dndt = deterministic(t,n)
    % calculate instantaneous rate of change for uninfected
    % hepatocytes (Tc), HCV virons (Vc), activated CD4+ cells (Th)
    % and HIV virons (Vh)
