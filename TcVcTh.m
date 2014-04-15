@@ -5,19 +5,20 @@ function dndt = TcVcTh(t,n)
 dndt=zeros(size(n));
 
 % model parameters
-Sc=3661.7;          % hepatocyte recruitment
-dc=1.4e-3;          % hepatocyte death rate
-beta_c=7.4e-8;      % rate of infection
-r1=0.31;            % uninfected hepatocyte proliferation rate
-r2=4.4;             % infected hepatocyte proliferation rate
-c=11.5;             % rate of virion clearance
-p=40.5;             % rate of virion production 
-Tc_max=6.33e6;      % total maximum hepatocyte count
-delta=2.7266;       % virion death rate
-alpha=2.5e-5;       % dependence of clearance on CD4+
-Sh=9e-7;            % CD4+ recruitment
-dh=0.1;             % CD4+ death rate
-gamma=0.10;         % dependence of recruitment on viral load
+   Sc=3661.7;          % hepatocyte recruitment
+   dc=1.4e-3;          % uninfected hepatocyte death rate
+   beta_c=7.4e-8;      % rate of HCV infection
+   r1=0.31;            % uninfected hepatocyte proliferation rate
+   r2=4.4;             % infected hepatocyte proliferation rate  
+   delta=2.7266;       % infected hepatocyte death rate   
+   Tc_max=6.33e6;      % total maximum hepatocyte count
+   c=11.5;             % rate of virion clearance
+   p=40.5;             % rate of virion production 
+   alpha=2.5e-5;       % dependence of virion clearance on CD4+
+   Sh=9;               % CD4+ recruitment
+   dh=9e-3;            % CD4+ death rate
+   gamma=1e-8;         % dependence of CD4+ recruitment on viral load
+
 
 Tc = n(1);           % uninfected hepatocyes
 Vc = n(2);           % virions/infected hepatocytes
