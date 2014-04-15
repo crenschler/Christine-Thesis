@@ -1,5 +1,5 @@
 % define time-span
-tspan = 0:1:365*40
+tspan = 1:1:365*40
 
 % define initial conditions
 Tc_init = 2.4e6;
@@ -11,7 +11,7 @@ init = [Tc_init, Vc_init, Th_init, Vh_init]
 % run deterministic model
 [T, N] = ode45(@deterministic, tspan, init, [])
 
-% rename variables
+% extract variables
 Tc = N(:,1);
 Vc = N(:,2);
 Th = N(:,3);

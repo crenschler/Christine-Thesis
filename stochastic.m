@@ -24,29 +24,32 @@ function y = stochastic(T, N)
   % loop over time and track population of HCC cells
   for i = 1:days
     % get Vc pop for time i
-    Vc = N(:,2);
+    Vc = N(i,2);
 
     % get Th pop for time i
-    Th = N(:,3);
+    Th = N(i,3);
 
     % Birth
     if (b*y(i)) < 5
       dyb = poissrnd(b*y(i));
     else
       dyb = b*y(i) + (normrnd(0,1)*sqrt(b*y(i)));
-
+    end
+    
     % Death
     if (p*y(i)) < 5
       dyd = poissrnd(p*y(i));
     else
       dyd = p*y(i) + (normrnd(0,1)*sqrt(p*y(i)));
-
+    end
+    
     % Mutation
-    if (alpha*delta*E(i)*I(i)) < 5
-      dym = poissrnd(alpha*delta*E(i)*I(i));
+    if (alpha*delta*Th*Vc) < 5
+      dym = poissrnd(alpha*delta*Th*Vc);
     else
-      dym = alpha*delta*E(i)*I(i) + (normrnd(0,1)*sqrt(alpha*delta*E(i)*I(i)));
-
+      dym = alpha*delta*Th*Vc + (normrnd(0,1)*sqrt(alpha*delta*Th*Vc));
+    end
+    
     % Update Total
     y(i+1) = max(y(i) + dyb - dyd + dym, 0);
 
