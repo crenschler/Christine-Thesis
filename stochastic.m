@@ -10,7 +10,7 @@ function y = stochastic(T, N)
   % deterministic equation
 
   % set time span
-  days = 365*50; % fifty years
+  days = 365*40; % forty years
 
   % y will store HCC cells over time
   y = zeros(days+1);
@@ -22,7 +22,7 @@ function y = stochastic(T, N)
   delta = 0.26;     % 
 
   % loop over time and track population of HCC cells
-  for i = 1:(365*50)
+  for i = 1:days
     % get Vc pop for time i
     Vc = N(:,2);
 

@@ -9,8 +9,6 @@ Vh_init = 10;
 init = [Tc_init, Vc_init, Th_init, Vh_init]
 
 % run deterministic model
-global T;
-global N;
 [T, N] = ode45(@deterministic, tspan, init, [])
 
 % rename variables
