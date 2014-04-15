@@ -1,5 +1,5 @@
 % define time-span
-tspan = [0,365*40]
+tspan = 0:1:365*40
 
 % define initial conditions
 Tc_init = 2.4e6;
