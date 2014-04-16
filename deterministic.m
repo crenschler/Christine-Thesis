@@ -23,7 +23,7 @@ function dndt = deterministic(t,n)
    beta_h=4.1e-6;      % rate of HIV infection 
    delta_h=0.6;        % HIV virion death rate
    k=75;               % HIV burst size 
-   e=0.6;              % HIV viral clearance
+   e=0.1;              % HIV viral clearance
 
    
    % current population sizes
@@ -42,7 +42,7 @@ function dndt = deterministic(t,n)
    dndt(3) = Sh*(1+gamma*Vc)-dh*Th-beta_h*Th*Vh;
 
    % dVh/dt
-   dndt(4) = (k/e)*beta_h*Th*Vh-delta_h*Vh;
+   dndt(4) = k/e*beta_h*Th*Vh-delta_h*Vh;
 
    % return dndt
 

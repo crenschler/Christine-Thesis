@@ -27,7 +27,7 @@ Th_init= 0.3068;
 Vh_init= 10;
 
 % run model
-[T_out, N_out]=ode45(@hcv,tspan,[Tc_init,Vc_init,Th_init,Vh_init]);
+[T_out, N_out]=ode45(@TcVcThVh,tspan,[Tc_init,Vc_init,Th_init,Vh_init]);
 
 % rename variables
 Tc = N_out(:,1);

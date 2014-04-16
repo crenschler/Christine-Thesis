@@ -19,7 +19,7 @@ function y = stochastic(T, N)
   b = 0.26;         % birth rate of HCC cells
   p = 0.01;         % death rate of HCC cells
   alpha = 0.4e-10;  % mutation rate of hepatocytes
-  delta = 0.26;     % 
+  delta = 0.26;     % clearance
 
   % loop over time and track population of HCC cells
   for i = 1:days

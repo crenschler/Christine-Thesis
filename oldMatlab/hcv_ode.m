@@ -19,7 +19,7 @@ tspan = [0,500];
 % define initial conditions
 Tc_init= 2.4e6;
 Vc_init= 1.0e6;
-Th_init= .38;
+Th_init= .3068;
 
 % run model
 [T_out, N_out]=ode45(@TcVcTh, tspan, [Tc_init, Vc_init, Th_init], []);
@@ -34,7 +34,7 @@ csvwrite('N_out.csv', N_out)
 
 
 % plot
-figure(1)
+figure(2)
 clf
 semilogy(T_out,Tc,'b-','LineWidth',2);
 hold on;
