@@ -1,4 +1,4 @@
-function dndt = deterministic(t,n)
+function dndt = deterministic(t,n, beta_c, delta)
    % calculate instantaneous rate of change for uninfected
    % hepatocytes (Tc), HCV virons (Vc), activated CD4+ cells (Th)
    % and HIV virons (Vh)
@@ -9,10 +9,18 @@ function dndt = deterministic(t,n)
    % fixed model parameters
    Sc=3661.7;          % hepatocyte recruitment
    dc=1.4e-3;          % uninfected hepatocyte death rate
-   beta_c=7.4e-8;      % rate of HCV infection
+   
+   % COMMENTED OUT
+   %beta_c=7.4e-8;      % rate of HCV infection
+   
+
    r1=0.31;            % uninfected hepatocyte proliferation rate
    r2=4.4;             % infected hepatocyte proliferation rate  
-   delta=2.7266;       % infected hepatocyte death rate   
+   
+   % COMMENTED OUT
+   %delta=2.7266;       % infected hepatocyte death rate   
+   
+
    Tc_max=6.33e6;      % total maximum hepatocyte count
    c=11.5;             % rate of virion clearance
    p=40.5;             % rate of virion production 
