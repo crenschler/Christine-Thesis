@@ -19,14 +19,19 @@ beta_c = zeros(numSims);
 % vector for storing delta
 delta = zeros(numSims);
 
+% generate hypercube: numSims by 2 parameters
+probs = lhsdesign(numSims, 2);
+
 %%%%%%%%%%%%%%% Start simulations
 for sim = 1:numSims
 	     
   % draw random number between min and max for simulation
-  beta_c(sim) = unifrnd(1e-8, 1e-6);
+  %beta_c(sim) = unifrnd(1e-8, 1e-6);
+  beta_c(sim) = logninv(probs(sim,1), MEAN, STD)
 
   % draw random number between min and max for simulation
-  delta(sim) = unifrnd(1e-3, 1);
+  %delta(sim) = unifrnd(1e-3, 1);
+  delta(sim) = logninv(probs(sim,2), MEAN, STD)
 
   % define initial conditions
   Tc_init = 2.4e6;
