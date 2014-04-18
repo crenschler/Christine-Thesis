@@ -44,5 +44,5 @@ semilogy(T_out,Th,'g-','LineWidth',2);
 xlabel('Time (days)')
 ylabel('HCV RNA & cells/ml')
 legend('Tc','Vc','Th')
-title('ODE model','Fontsize',12)
+title('Monoinfection ODE','Fontsize',12)
 ylim([0 10000000])
