@@ -1,5 +1,5 @@
 % define number of simulations
-numSims = 1000;
+numSims = 10;
 
 % define time-span
 tspan = 1:1:365*40;
@@ -16,32 +16,37 @@ dayOfCancer = zeros(numSims);
 % vector for storing beta_c
 beta_c = zeros(numSims);
 
-% vector for storing delta
-delta = zeros(numSims);
+% vector for storing delta_c
+delta_c = zeros(numSims);
 
-% generate hypercube: numSims by 2 parameters
-probs = lhsdesign(numSims, 2);
+% vector for storing alpha;
+alpha = zeros(numSims);
+
+% generate hypercube: numSims by 3 parameters
+probs = lhsdesign(numSims, 3);
 
 %%%%%%%%%%%%%%% Start simulations
 for sim = 1:numSims
 	     
   % draw random number between min and max for simulation
   %beta_c(sim) = unifrnd(1e-8, 1e-6);
-  beta_c(sim) = logninv(probs(sim,1), MEAN, STD)
+  beta_c(sim) = logninv(probs(sim,1), 2.25e-7, 4.5e-7);
 
   % draw random number between min and max for simulation
   %delta(sim) = unifrnd(1e-3, 1);
-  delta(sim) = logninv(probs(sim,2), MEAN, STD)
+  delta_c(sim) = logninv(probs(sim,2), 0.26, 0.16);
+  
+  alpha(sim) = logninv(probs(sim,3), 0.04, 0.02);
 
   % define initial conditions
-  Tc_init = 2.4e6;
+  Tc_init = 5.31e6;
   Vc_init = 1.0e6;
-  Th_init = 0.3068;
+  Th_init = 1000;
   Vh_init = 300;
   init = [Tc_init, Vc_init, Th_init, Vh_init];
 
   % run deterministic model using inputs for this simulation
-  [T, N] = ode45(@deterministic, tspan, init, [], beta_c(sim), delta(sim));
+  [T, N] = ode45(@deterministic, tspan, init, [], beta_c(sim), delta_c(sim), alpha(sim));
 
   % extract variables
   Tc = N(:,1);

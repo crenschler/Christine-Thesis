@@ -1,4 +1,4 @@
-function dndt = deterministic(t,n, beta_c, delta)
+function dndt = deterministic(t,n,beta_c,delta_c,alpha)
    % calculate instantaneous rate of change for uninfected
    % hepatocytes (Tc), HCV virons (Vc), activated CD4+ cells (Th)
    % and HIV virons (Vh)
@@ -11,20 +11,23 @@ function dndt = deterministic(t,n, beta_c, delta)
    dc=1.4e-3;          % uninfected hepatocyte death rate
    
    % COMMENTED OUT
-   %beta_c=7.4e-8;      % rate of HCV infection
+   %beta_c=2.25e-7;      % rate of HCV infection
    
 
    r1=0.31;            % uninfected hepatocyte proliferation rate
    r2=4.4;             % infected hepatocyte proliferation rate  
    
    % COMMENTED OUT
-   %delta=2.7266;       % infected hepatocyte death rate   
+   %delta_c=0.26;       % infected hepatocyte death rate   
    
 
    Tc_max=6.33e6;      % total maximum hepatocyte count
    c=11.5;             % rate of virion clearance
-   p=40.5;             % rate of virion production 
-   alpha=2.5e-5;       % dependence of virion clearance on CD4+
+   p=15;               % rate of virion production 
+   
+   % COMMENTED OUT
+   %alpha=0.003;       % dependence of virion clearance on CD4+
+   
    Sh=9;               % CD4+ recruitment
    dh=9e-3;            % CD4+ death rate
    gamma=1e-8;         % dependence of CD4+ recruitment on viral load
@@ -44,7 +47,7 @@ function dndt = deterministic(t,n, beta_c, delta)
    dndt(1) = Sc+r1*Tc*(1-((Tc+(c/p*Vc))/Tc_max))-dc*Tc-beta_c*Tc*Vc;
    
    % dVc/dt
-   dndt(2) = (p/c)*beta_c*Tc*Vc+r2*Vc*(1-((Tc+(c/p*Vc))/Tc_max))-delta*(1+alpha*Th)*Vc;
+   dndt(2) = (p/c)*beta_c*Tc*Vc+r2*Vc*(1-((Tc+(c/p*Vc))/Tc_max))-delta_c*(1+alpha*Th)*Vc;
 
    % dTh/dt
    dndt(3) = Sh*(1+gamma*Vc)-dh*Th-beta_h*Th*Vh;

@@ -18,8 +18,7 @@ function y = stochastic(T, N)
   % set parameters for stochastic model
   b = 0.26;         % birth rate of HCC cells
   p = 0.01;         % death rate of HCC cells
-  alpha = 0.4e-10;  % mutation rate of hepatocytes
-  delta = 0.26;     % clearance
+  alpha_m = 0.4e-10;  % mutation rate of hepatocytes
 
   % loop over time and track population of HCC cells
   for i = 1:days
@@ -44,10 +43,10 @@ function y = stochastic(T, N)
     end
     
     % Mutation
-    if (alpha*delta*Th*Vc) < 5
-      dym = poissrnd(alpha*delta*Th*Vc);
+    if (alpha_m*delta_c*(1+alpha*Th)*Vc) < 5
+      dym = poissrnd(alpha_m*delta_c*(1+alpha*Th)*Vc);
     else
-      dym = alpha*delta*Th*Vc + (normrnd(0,1)*sqrt(alpha*delta*Th*Vc));
+      dym = alpha_m*delta_c*(1+alpha*Th)*Vc + (normrnd(0,1)*sqrt(alpha_m*delta_c*(1+alpha*Th)*Vc));
     end
     
     % Update Total
