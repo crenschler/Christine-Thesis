@@ -1,4 +1,4 @@
-function y = stochastic(T, N)
+function y = stochastic(T, N, beta_c, delta_c, alpha)
   % Runs the stochastic model for HCC development beginning with
   % the start of HCV infection and lasting 40 years using the time
   % courses from the deterministic model (deterministic.m)

@@ -72,7 +72,7 @@ for sim = 1:numSims
   %ylim([0 100000000])
 
   % call stochastic function
-  HCC_cells = stochastic(T, N);
+  HCC_cells = stochastic(T, N, beta_c(sim), delta_c(sim), alpha(sim));
 
   % above threshold vector of 0 (FALSE) and 1 (TRUE)
   aboveThreshold = HCC_cells > threshold;
@@ -93,7 +93,11 @@ for sim = 1:numSims
 end
 
 % hasCancer has record of who got cancer
+hasCancer
+
 % dayOfCancer has record of what day they got cancer on
+dayOfCancer
+
 % beta_c has record of the value of param1 for each person
 % delta has a record of the value of param2 for each person
 
