@@ -33,13 +33,17 @@ for sim = 1:numSims
 	     
   % draw random number between min and max for simulation
   %beta_c(sim) = unifrnd(1e-8, 1e-6);
-  beta_c(sim) = logninv(probs(sim,1), 2.25e-7, 4.5e-7);
+  P = probs(sim,1)
+  beta_c(sim) = logninv(P, 2.25e-7, 4.5e-7);
 
   % draw random number between min and max for simulation
-  %delta(sim) = unifrnd(1e-3, 1);
-  delta_c(sim) = logninv(probs(sim,2), 0.26, 0.16);
+  % delta(sim) = unifrnd(1e-3, 1);
+  P = probs(sim,2)
+  delta_c(sim) = logninv(P, 0.26, 0.16);
   
-  alpha(sim) = logninv(probs(sim,3), 0.04, 0.02);
+  % dependence of viral clearance on cd4 count
+  P = probs(sim,3)
+  alpha(sim) = logninv(P, 0.04, 0.02);
 
   % define initial conditions
   Tc_init = 5.31e6;
