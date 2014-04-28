@@ -1,6 +1,9 @@
 % define number of simulations
 numSims = 10;
 
+% TIMER
+start_time = cputime;
+
 % define time-span
 tspan = 1:1:365*40;
 
@@ -101,3 +104,6 @@ dayOfCancer
 % beta_c has record of the value of param1 for each person
 % delta has a record of the value of param2 for each person
 
+
+% TIMER
+elapsed_time = cputime - start_time
